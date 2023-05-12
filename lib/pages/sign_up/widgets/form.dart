@@ -1,5 +1,4 @@
 import 'package:emo_boss/common/generated/l10n.dart';
-import 'package:emo_boss/common/store/config_store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/common/utils/utils.dart';
@@ -120,39 +119,6 @@ class _SignUpFormState extends State<SignUpForm> {
             focusNode: userFocusNode,
             onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(passwordFocusNode),
           ),
-          // VSpace.lg,
-          // CustomInput.outline(
-          //   controller: _controller.passController,
-          //   padding: paddingTextEditor.copyWith(right: 0),
-          //   prefixIcon: renderIcon(Icons.lock),
-          //   suffixIcon: IconButton(
-          //     onPressed: () => setState(() => isShowPassword = !isShowPassword),
-          //     icon: renderIcon(isShowPassword ? CustomIcons.eye_slash : CustomIcons.eye, size: IconSizes.sm),
-          //     splashColor: Colors.transparent,
-          //     highlightColor: Colors.transparent,
-          //     focusColor: Colors.transparent,
-          //     hoverColor: Colors.transparent,
-          //     padding: EdgeInsets.only(right: Insets.sm),
-          //   ),
-          //   textAlign: TextAlign.start,
-          //   labelText: S.current.Mat_khau,
-          //   labelStyle: textStyle.copyWith(color: AppColor.grey600),
-          //   floatingLabelStyle: floatingLabelStyle,
-          //   textStyle: textStyle,
-          //   colorBorderFocus: mainInputColor,
-          //   type: TextInputType.visiblePassword,
-          //   isShow: isShowPassword,
-          //   validator: FormBuilderValidators.compose([
-          //     FormBuilderValidators.required(errorText: S.current.Vui_long_khong_de_trong),
-          //     FormBuilderValidators.match(
-          //       r'^\S+$',
-          //       errorText: 'Không chứa khoảng trắng',
-          //     ),
-          //     FormBuilderValidators.minLength(6, errorText: 'Mật khẩu phải có ít nhất 6 ký tự'),
-          //     FormBuilderValidators.maxLength(10, errorText: 'Mật khẩu không được quá 10 ký tự'),
-          //   ]),
-          //   focusNode: passwordFocusNode,
-          // ),
           VSpace.lg,
           CustomInput.outline(
             controller: _controller.rePassController,

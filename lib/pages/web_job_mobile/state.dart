@@ -3,19 +3,19 @@ import 'package:get/get.dart';
 import '../../common/entities/entities.dart';
 
 class GetJobState {
-  Job? job;
-  int? currentId;
+  final Rx<Job> _job = Rx<Job>(Job());
+
+  Job get job => _job.value;
+
+  setJob(Job value) => _job.value = value;
+
   StartJobResponse? startJobResponse;
 
   final keyWordHintId = 'search-key-hint';
 
-  final Rx<JobStatus> _statusJob = JobStatus.none.obs;
-
-  JobStatus get jobStatus => _statusJob.value;
-
-  Stream<JobStatus> get statusJobStream => _statusJob.stream;
-
-  setJobStatus(JobStatus value) => _statusJob.value = value;
+  Uri get uriGoogle => Uri.parse(job.keyWord.isNotEmpty
+      ? "https://www.google.com/search?q=${Uri.encodeComponent(job.keyWord)}"
+      : "https://www.google.com/");
 
   final RxString _title = ''.obs;
 
@@ -23,12 +23,24 @@ class GetJobState {
 
   setTitle(String value) => _title.value = value;
 
-  final RxString _tip = ''.obs;
+  final RxString _currentUrl = ''.obs;
 
-  String get tip => _tip.value;
+  String get currentUrl => _currentUrl.value;
 
-  setTip(String value) => _tip.value = value;
+  setCurrentUrl(String value) => _currentUrl.value = value;
 
+  final RxInt _indexPage = 0.obs;
+
+  int get indexPage => _indexPage.value;
+
+  final RxString _valuePage = ''.obs;
+
+  String get valuePage => _valuePage.value;
+
+  setIndexValuePage(int index, String value) {
+    _indexPage.value = index;
+    _valuePage.value = value;
+  }
 }
 
 enum Event {

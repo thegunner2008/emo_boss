@@ -59,7 +59,7 @@ dependencies:
   webcontent_converter: ^0.0.7+2
   jwt_decoder: ^2.0.1
   uuid: ^3.0.7
-  flutter_form_builder: ^7.7.0
+  flutter_form_builder: ^8.0.0
   form_builder_validators: ^8.4.0
   logger: any
   #  international
@@ -96,6 +96,7 @@ dependencies:
   empty_widget: 0.0.5
   awesome_dialog: 3.0.2
   device_info_plus: 8.1.0
+  basic_flutter_theme: ^0.4.1
 
 dev_dependencies:
   integration_test:

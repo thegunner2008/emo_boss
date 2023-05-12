@@ -1,5 +1,6 @@
 import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/theme/theme.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/entities/entities.dart';
@@ -45,6 +46,52 @@ class JobDoneController extends GetxController {
   Future<ResponseList<Job>> getJobs() => JobStore.to.getJobs(
         page: state.loadMoreCounter.pageNumber,
         pageSize: state.loadMoreCounter.itemPerPages,
+      );
+
+  Future deleteJob({
+    required BuildContext context,
+    required Job job,
+  }) =>
+      Loading.openAndDismissLoading(
+        () async {
+          await JobStore.to.deleteJob(job: job);
+          if (context.mounted) {
+            CustomDialog.showSuccess(
+              context: context,
+              content: 'Xoá thành công?',
+              onApply: () => _handleInitData(),
+            );
+          }
+        },
+        onError: (_) {
+          CustomDialog.showError(
+            context: context,
+            content: 'Có lỗi xảy ra khi gửi kết quả?',
+          );
+        },
+      );
+
+  Future editJob({
+    required BuildContext context,
+    required Job job,
+  }) =>
+      Loading.openAndDismissLoading(
+        () async {
+          await JobStore.to.editJob(job: job);
+          if (context.mounted) {
+            CustomDialog.showSuccess(
+              context: context,
+              content: 'Sửa thành công?',
+              onApply: () => _handleInitData(),
+            );
+          }
+        },
+        onError: (_) {
+          CustomDialog.showError(
+            context: context,
+            content: 'Có lỗi xảy ra khi gửi kết quả?',
+          );
+        },
       );
 
   /// Logic Mobile

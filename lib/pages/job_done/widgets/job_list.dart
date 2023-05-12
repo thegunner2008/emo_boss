@@ -3,6 +3,7 @@ import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/common/utils/utils.dart';
 import 'package:emo_boss/common/values/values.dart';
+import 'package:emo_boss/pages/job_done/dialog/edit_job_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,8 @@ class _JobListState extends State<JobList> {
   void _handleTapJob(
     BuildContext context, {
     required Job job,
-  }) {}
+  }) =>
+      showEditJobDialog(context: context, job: job, hideDeleteButton: false);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class _JobListState extends State<JobList> {
               currentDate: currentDate,
             );
           }
-          DateTime? previousItemDate = _controller.state.jobs[index-1].createdAt;
+          DateTime? previousItemDate = _controller.state.jobs[index - 1].createdAt;
           if (DateUtils.isSameDay(currentDate, previousItemDate)) {
             return item;
           }

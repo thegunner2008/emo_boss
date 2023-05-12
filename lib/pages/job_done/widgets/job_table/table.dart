@@ -3,6 +3,7 @@ import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/common/utils/utils.dart';
+import 'package:emo_boss/pages/job_done/dialog/edit_job_dialog.dart';
 import 'package:emo_boss/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

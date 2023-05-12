@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:emo_boss/common/entities/entities.dart';
-import 'package:emo_boss/common/remote/remote.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' hide Headers;
+import 'package:emo_boss/common/entities/entities.dart';
+import 'package:emo_boss/common/remote/remote.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -37,27 +37,20 @@ abstract class ApiService {
     @Query("order") String order = "desc",
   });
 
-  @GET("/jobs/current")
-  Future<CurrentJobResponse> getCurrentJob();
-
-  @GET("/jobs/start")
-  Future<StartJobResponse> startJob({
-    @Query("job_id") required int jobId,
-    @Query("current_id") required int currentId,
+  @POST("jobs")
+  Future createJobs({
+    @Body() required Map<String, dynamic> request,
   });
 
-  @GET("/jobs/finish")
-  Future finishJob({
-    @Query("token") required String token,
-    @Query("value_page") required String valuePage,
+  @PUT("jobs/{job_id}")
+  Future editJobs({
+    @Path("job_id") required int id,
+    @Body() required Map<String, dynamic> request,
   });
 
-  @GET("/jobs/done")
-  Future<ResponseJob> getDoneJobs({
-    @Query("page_size") int pageSize = 20,
-    @Query("page") int page = 1,
-    @Query("sort_by") String sort = "id",
-    @Query("order") String order = "desc",
+  @DELETE("jobs")
+  Future deleteJobs({
+    @Query("job_id") required int id,
   });
 
   @GET("/withdraws/all")

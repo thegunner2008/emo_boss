@@ -77,6 +77,37 @@ class Job {
 
   Map<String, dynamic> toJson() => _$JobToJson(this);
 
+  Job copyWith({
+    int? id,
+    String? keyWord,
+    String? image,
+    int? total,
+    int? count,
+    String? url,
+    String? keyPage,
+    String? valuePage,
+    int? time,
+    String? baseUrl,
+    int? money,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      Job(
+        id: id ?? this.id,
+        keyWord: keyWord ?? this.keyWord,
+        image: image ?? this.image,
+        total: total ?? this.total,
+        count: count ?? this.count,
+        url: url ?? this.url,
+        keyPage: keyPage ?? this.keyPage,
+        valuePage: valuePage ?? this.valuePage,
+        time: time ?? this.time,
+        baseUrl: baseUrl ?? this.baseUrl,
+        money: money ?? this.money,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+
   static Job cloneInstance(Job job) {
     return Job.fromJson(job.toJson());
   }

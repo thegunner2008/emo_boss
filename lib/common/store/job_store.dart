@@ -6,20 +6,27 @@ import '../remote/remote.dart';
 abstract class JobStore {
   static JobStore get to => AppInjector.injector<JobStore>();
 
-  Future<CurrentJobResponse> getCurrentJob();
-
   Future<ResponseList<Job>> getJobs({
     int pageSize,
     int page,
     String sort,
     String order,
   });
+
+  Future createJob({
+    required Job job,
+  });
+
+  Future editJob({
+    required Job job,
+  });
+
+  Future deleteJob({
+    required Job job,
+  });
 }
 
 class JobStoreImpl implements JobStore {
-  @override
-  Future<CurrentJobResponse> getCurrentJob() => ApiService.create().getCurrentJob();
-
   @override
   Future<ResponseList<Job>> getJobs({
     int pageSize = 20,
@@ -33,4 +40,38 @@ class JobStoreImpl implements JobStore {
         sort: sort,
         order: order,
       );
+
+  @override
+  Future createJob({
+    required Job job,
+  }) {
+    final request = job.toJson();
+    return ApiService.create().createJobs(
+      request: request,
+    );
+  }
+
+  @override
+  Future editJob({
+    required Job job,
+  }) {
+    final request = {
+      'total': job.total,
+      'time': job.time,
+      'money': job.money,
+    };
+    return ApiService.create().editJobs(
+      id: job.id,
+      request: request,
+    );
+  }
+
+  @override
+  Future deleteJob({
+    required Job job,
+  }) {
+    return ApiService.create().deleteJobs(
+      id: job.id,
+    );
+  }
 }

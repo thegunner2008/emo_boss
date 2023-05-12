@@ -1,9 +1,14 @@
 import 'package:emo_boss/common/entities/entities.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
+import 'package:emo_boss/common/utils/extensions/extensions.dart';
 import 'package:emo_boss/pages/job_done/index.dart';
+import 'package:emo_boss/pages/pages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../dialog/init_job_dialog.dart';
 
 class JobDoneMobile extends StatelessWidget {
   JobDoneMobile({Key? key}) : super(key: key);
@@ -12,12 +17,25 @@ class JobDoneMobile extends StatelessWidget {
 
   User get user => UserStore.to.user;
 
+  Future onClickAddJob(BuildContext context) async {
+    if (kIsWeb) return;
+    final jobInit = await showInitJobDialog(context);
+    if (jobInit == null) return;
+
+    if (context.mounted) {
+      await context.pushNavigator<Job>(
+        WebJobMobilePage(job: jobInit),
+        transitionType: ContextPushTransitionType.rightToLeft,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColor.primaryColor,
-        onPressed: () => _controller,
+        onPressed: () => onClickAddJob(context),
         child: const Icon(Icons.add),
       ),
       body: NestedScrollView(

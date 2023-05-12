@@ -6,6 +6,8 @@ class MoreDetailWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  JobDoneController get _controller => JobDoneController.to;
+
   final Job job;
 
   @override
@@ -56,13 +58,14 @@ class MoreDetailWidget extends StatelessWidget {
       );
 
   Widget _details(BuildContext context) => Column(
+        // mainAxisSize: MainAxisSize.max,
         children: [
           Row(
             children: [
               Expanded(
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-                  minLeadingWidth: 150.scaleSize,
+                  minLeadingWidth: 80.scaleSize,
                   leading: Text("Từ khoá", style: TextStyles.title2),
                   title: SelectableText(
                     job.keyWord,
@@ -74,7 +77,7 @@ class MoreDetailWidget extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-                  minLeadingWidth: 150.scaleSize,
+                  minLeadingWidth: 100.scaleSize,
                   leading: Text(
                     S.current.Hoan_thanh,
                     style: TextStyles.title2,
@@ -91,8 +94,42 @@ class MoreDetailWidget extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-                  minLeadingWidth: 150.scaleSize,
-                  leading: Text(S.current.Chi_tiet, style: TextStyles.title2),
+                  minLeadingWidth: 80.scaleSize,
+                  leading: Text("URL", style: TextStyles.title2),
+                  title: SelectableText(
+                    job.url,
+                    style: TextStyles.title2.copyWith(
+                      decoration: TextDecoration.underline, // Add underline to the link
+                      color: AppColor.primaryColor, // Set the color of the link to green
+                    ),
+                    maxLines: 3,
+                  ),
+                  dense: true,
+                ),
+              ),
+              Expanded(
+                child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
+                  minLeadingWidth: 100.scaleSize,
+                  leading: Text("Key-Value", style: TextStyles.title2),
+                  title: Text(
+                    "${job.keyPage} - ${job.valuePage}",
+                    style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  dense: true,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
+                  minLeadingWidth: 80.scaleSize,
+                  leading: Text(S.current.Gia_tri, style: TextStyles.title2),
                   title: Text(
                     "${job.money.toCurrencyStr}đ",
                     style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
@@ -102,59 +139,26 @@ class MoreDetailWidget extends StatelessWidget {
                   dense: true,
                 ),
               ),
-              Expanded(
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-                  minLeadingWidth: 150.scaleSize,
-                  leading: Text(S.current.Gia_tri, style: TextStyles.title2),
-                  title: SelectableText(
-                    job.url,
-                    style: TextStyles.title2.copyWith(
-                      decoration: TextDecoration.underline, // Add underline to the link
-                      color: AppColor.primaryColor, // Set the color of the link to green
-                    ),
-                  ),
-                  dense: true,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomButton.fullColor(
+                      text: S.current.Chinh_sua,
+                      background: AppColor.primaryColor,
+                      textColor: AppColor.white,
+                      onPressed: () => showEditJobDialog(context: context, job: job)),
+                  HSpace.med,
+                  CustomButton.fullColor(
+                      text: S.current.Xoa,
+                      background: AppColor.errorColor,
+                      textColor: AppColor.white,
+                      onPressed: () => _controller.deleteJob(context: context, job: job)),
+                  HSpace.med,
+                ],
               ),
             ],
           ),
-          Divider(indent: Insets.lg, endIndent: Insets.lg),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-            minLeadingWidth: 150.scaleSize,
-            leading: Text("Key-Value", style: TextStyles.title2),
-            title: Text(
-              "${job.keyPage} - ${job.valuePage}",
-              style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            dense: true,
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomButton.fullColor(
-                  text: S.current.Chinh_sua,
-                  background: AppColor.primaryColor,
-                  textColor: AppColor.white,
-                  onPressed: () {},
-                ),
-                HSpace.med,
-                CustomButton.fullColor(
-                  text: S.current.Xoa,
-                  background: AppColor.errorColor,
-                  textColor: AppColor.white,
-                  onPressed: () {},
-                ),
-                HSpace.med,
-              ],
-            ),
-          ),
-          const Spacer(),
         ],
       );
 }

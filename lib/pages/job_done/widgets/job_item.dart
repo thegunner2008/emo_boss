@@ -106,19 +106,6 @@ class JobItem extends StatelessWidget {
     );
   }
 
-  Widget _renderTotalPayment(int total, JobState status) {
-    Color color = AppColor.warnColor;
-    if (status == JobStatus.done) {
-      color = AppColor.blueLight;
-    } else if (status == JobState.cancel) {
-      color = AppColor.errorColor;
-    }
-    return Text(
-      "${truncateNumberToString(total)}đ",
-      style: TextStyles.title1.copyWith(color: color),
-    );
-  }
-
   Widget _renderIconData(int index) => Container(
         width: 40,
         height: 40,

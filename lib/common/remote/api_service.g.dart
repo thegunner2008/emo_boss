@@ -148,77 +148,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<CurrentJobResponse> getCurrentJob() async {
+  Future<dynamic> createJobs({required request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CurrentJobResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/jobs/current',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CurrentJobResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<StartJobResponse> startJob({
-    required jobId,
-    required currentId,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'job_id': jobId,
-      r'current_id': currentId,
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<StartJobResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/jobs/start',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StartJobResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<dynamic> finishJob({
-    required token,
-    required valuePage,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'token': token,
-      r'value_page': valuePage,
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    _data.addAll(request);
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/jobs/finish',
+          'jobs',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -228,35 +171,50 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ResponseJob> getDoneJobs({
-    pageSize = 20,
-    page = 1,
-    sort = "id",
-    order = "desc",
+  Future<dynamic> editJobs({
+    required id,
+    required request,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page_size': pageSize,
-      r'page': page,
-      r'sort_by': sort,
-      r'order': order,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ResponseJob>(Options(
-      method: 'GET',
+    _data.addAll(request);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/jobs/done',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseJob.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'jobs/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> deleteJobs({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'job_id': id};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'jobs',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
