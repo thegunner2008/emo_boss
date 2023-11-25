@@ -1,35 +1,35 @@
 part of "table.dart";
 
 final _tableColumns = [
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 2,
-    key: JobColumnConstants.name,
+    key: UserColumnConstants.name,
     name: "User",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(rowData.userName);
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 3,
-    key: JobColumnConstants.count,
+    key: UserColumnConstants.fullName,
     name: "Tên",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       final value = rowData.fullName;
       return _textWrapper(value, alignment: Alignment.center);
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 3,
-    key: JobColumnConstants.value,
+    key: UserColumnConstants.email,
     name: "Email",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       final value = rowData.email;
       return _textWrapper(value, alignment: Alignment.center);
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 3,
-    key: JobColumnConstants.createdDate,
+    key: UserColumnConstants.createdDate,
     name: S.current.Ngay_tao,
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
@@ -37,9 +37,9 @@ final _tableColumns = [
       );
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 3,
-    key: JobColumnConstants.expiredDate,
+    key: UserColumnConstants.lastLogin,
     name: "Đăng nhập",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
@@ -48,24 +48,24 @@ final _tableColumns = [
       );
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 2,
-    key: JobColumnConstants.status,
+    key: UserColumnConstants.countTransactions,
     name: "Số nhiệm vụ",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
-        rowData.totalJobsByIds.toCurrencyStr,
+        rowData.countTransaction.toCurrencyStr,
         alignment: Alignment.center,
       );
     },
   ),
-  WebDataTableColumn<UserPlus>(
+  WebDataTableColumn<UserTotal>(
     flex: 2,
-    key: JobColumnConstants.status,
+    key: UserColumnConstants.countJob,
     name: "Số lần làm",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
-        rowData.totalJobs.toCurrencyStr,
+        rowData.countJob.toCurrencyStr,
         alignment: Alignment.center,
       );
     },

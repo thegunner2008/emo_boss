@@ -17,8 +17,8 @@ class UserMobile extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Lịch sử rút tiền', style: TextStyle(color: Colors.white)),
-          backgroundColor: AppColor.successColor,
+          title: const Text('Users', style: TextStyle(color: Colors.white)),
+          backgroundColor: AppColor.primaryColor,
         ),
         body: Container(
           color: AppColor.primaryBackgroundSuperLight,

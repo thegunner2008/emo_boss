@@ -1,12 +1,8 @@
-import 'package:emo_boss/common/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:emo_boss/common/generated/l10n.dart';
-import 'package:emo_boss/common/models/models.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
-import 'package:emo_boss/pages/pages.dart';
-import 'package:emo_boss/common/config/config.dart';
+import 'package:emo_boss/common/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 
 class WebLeftPanelWidget extends StatelessWidget {
   const WebLeftPanelWidget({Key? key}) : super(key: key);

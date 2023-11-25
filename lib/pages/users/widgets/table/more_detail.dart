@@ -6,7 +6,7 @@ class MoreDetailWidget extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final UserPlus user;
+  final UserTotal user;
 
   @override
   MoreDetailWidgetState createState() => MoreDetailWidgetState();
@@ -17,7 +17,7 @@ class MoreDetailWidgetState extends State<MoreDetailWidget> {
 
   int get userId => widget.user.id;
 
-  UserPlus? user;
+  UserTotal? user;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class MoreDetailWidgetState extends State<MoreDetailWidget> {
         child: CircularProgressIndicator(),
       );
 
-  Widget _details(BuildContext context, UserPlus user) => Column(
+  Widget _details(BuildContext context, UserTotal user) => Column(
         children: [
           Row(
             children: [
@@ -60,7 +60,7 @@ class MoreDetailWidgetState extends State<MoreDetailWidget> {
                   minLeadingWidth: 150.scaleSize,
                   leading: Text("Tiền đã làm", style: TextStyles.title2),
                   title: Text(
-                    user.userJobs.map((e) => e.job?.money ?? 0).sum.toCurrencyStr,
+                    user.total.toCurrencyStr,
                     style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
                   ),
                   dense: true,
@@ -75,7 +75,7 @@ class MoreDetailWidgetState extends State<MoreDetailWidget> {
                     style: TextStyles.title2,
                   ),
                   title: Text(
-                    user.withdraws.map((e) => e.money).sum.toCurrencyStr,
+                    user.withdrawTotal.toCurrencyStr,
                     style: TextStyles.title2.copyWith(color: AppColor.secondaryColor),
                   ),
                   dense: true,

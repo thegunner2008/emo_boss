@@ -31,7 +31,7 @@ class JobListHeaderWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColor.white,
               shape: BoxShape.circle,
             ),
@@ -76,7 +76,7 @@ class JobListHeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(Insets.sm),
       decoration: const BoxDecoration(
-        color: AppColor.successColor,
+        color: AppColor.primaryColor,
         borderRadius: Corners.medBorder,
       ),
       child: Wrap(
@@ -99,7 +99,7 @@ class JobListHeaderWidget extends StatelessWidget {
           _infoItem(
             width: _widthInfoItem(context),
             title: "Đã rút",
-            info: '500đ',
+            info: '0đ',
             icon: Icons.star,
             colorIcon: AppColor.successColor,
           ),

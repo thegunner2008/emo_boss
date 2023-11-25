@@ -62,12 +62,17 @@ abstract class ApiService {
   });
 
   @POST("/withdraws")
-  Future postWithdraws(
+  Future postWithdraw(
+    @Body() Map<String, dynamic> request,
+  );
+
+  @POST("/withdraws/pay")
+  Future payWithdraw(
     @Body() Map<String, dynamic> request,
   );
 
   @GET("/users")
-  Future<ResponseList<UserPlus>> getUsers({
+  Future<ResponseList<UserTotal>> getUsers({
     @Query("page_size") int pageSize = 20,
     @Query("page") int page = 1,
     @Query("sort_by") String sort = "id",
@@ -75,7 +80,7 @@ abstract class ApiService {
   });
 
   @GET("/users/{user_id}")
-  Future<UserPlus> getUserPlus({
+  Future<UserTotal> getUserPlus({
     @Path("user_id") required int userId,
   });
 

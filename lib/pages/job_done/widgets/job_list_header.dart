@@ -74,7 +74,7 @@ class JobListHeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(Insets.sm),
       decoration: const BoxDecoration(
-        color: AppColor.successColor,
+        color: AppColor.primaryColor,
         borderRadius: Corners.medBorder,
       ),
       child: Wrap(
@@ -85,7 +85,7 @@ class JobListHeaderWidget extends StatelessWidget {
             title: "Tổng Chiến dịch",
             info: countItem.toCurrencyStr,
             icon: Icons.inventory_outlined,
-            colorIcon: AppColor.successColor,
+            colorIcon: AppColor.primaryColor,
           ),
           _infoItem(
             width: _widthInfoItem(context),

@@ -55,7 +55,7 @@ class _WebDataTablePaginationState extends State<WebDataTablePagination> {
           children: <Widget>[
             Expanded(
               child: Row(
-                mainAxisAlignment: ConfigStore.to.screenWidth == ScreenWidth.DESKTOP
+                mainAxisAlignment: ConfigStore.to.screenWidth == ScreenWidth.destop
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,7 +98,7 @@ class _WebDataTablePaginationState extends State<WebDataTablePagination> {
               );
             }
           },
-          icon: customIcon(CustomIcons.step_forward),
+          icon: customIcon(CustomIcons.stepForward),
         ),
         IconButton(
           onPressed: () {
@@ -110,7 +110,7 @@ class _WebDataTablePaginationState extends State<WebDataTablePagination> {
               _tablePaginationData.currentItemsPerPage,
             );
           },
-          icon: customIcon(CustomIcons.fast_forward),
+          icon: customIcon(CustomIcons.fastForward),
         ),
       ],
     );
@@ -131,7 +131,7 @@ class _WebDataTablePaginationState extends State<WebDataTablePagination> {
               _tablePaginationData.currentItemsPerPage,
             );
           },
-          icon: customIcon(CustomIcons.fast_backward),
+          icon: customIcon(CustomIcons.fastBackward),
         ),
         IconButton(
           onPressed: () {
@@ -145,7 +145,7 @@ class _WebDataTablePaginationState extends State<WebDataTablePagination> {
               );
             }
           },
-          icon: customIcon(CustomIcons.step_backward),
+          icon: customIcon(CustomIcons.stepBackward),
         ),
       ],
     );

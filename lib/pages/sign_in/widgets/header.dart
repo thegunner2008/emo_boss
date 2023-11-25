@@ -25,7 +25,7 @@ class SignInHeader extends StatelessWidget {
         alignment: Alignment.center,
         children: <Widget>[
           Image.asset(
-            AppImages.$appIcon,
+            AppImages.appIcon,
             width: 240 * ConfigStore.to.scale,
           ),
           Positioned(
@@ -33,7 +33,7 @@ class SignInHeader extends StatelessWidget {
             left: 0,
             child: CustomButton.customFullColor(
               height: _heightBtn,
-              background: AppColor.successColor,
+              background: AppColor.primaryColor,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -71,13 +71,13 @@ class SignInHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Image.asset(
-          AppImages.$appIcon,
+          AppImages.appIcon,
           width: 85 * ConfigStore.to.scale,
         ),
         Flexible(
           child: CustomButton.customFullColor(
             height: _heightBtn,
-            background: AppColor.successColor,
+            background: AppColor.primaryColor,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +110,7 @@ class SignInHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConfigStore.to.screenWidth != ScreenWidth.MOBILE
+    return ConfigStore.to.screenWidth != ScreenWidth.mobile
         ? _landscapeUI(context)
         : _portraitUI();
   }

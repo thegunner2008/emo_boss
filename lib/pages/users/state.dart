@@ -16,17 +16,17 @@ class UserState {
   final _totalMoney = RxInt(0);
   int get totalMoney => _totalMoney.value;
 
-  final _users = RxList<UserPlus>([]);
-  List<UserPlus> get users => _users;
-  void setUsers(List<UserPlus> value) => _users.value = value;
+  final _users = RxList<UserTotal>([]);
+  List<UserTotal> get users => _users;
+  void setUsers(List<UserTotal> value) => _users.value = value;
 
-  void addUsers(ResponseList<UserPlus> response) {
+  void addUsers(ResponseList<UserTotal> response) {
     setCount(response.metadata.totalItems);
     _users.addAll(response.data);
     _users.refresh();
   }
 
-  void setDataState(ResponseList<UserPlus> response) {
+  void setDataState(ResponseList<UserTotal> response) {
     setCount(response.metadata.totalItems);
     setUsers(response.data);
   }
@@ -48,9 +48,9 @@ class UserState {
 
   void setTotal(int total) => this.total = total;
 
-  var selectedUser = Rx<UserPlus?>(null);
+  var selectedUser = Rx<UserTotal?>(null);
 
-  void setSelectedUser(UserPlus? selected) => selectedUser.value = selected;
+  void setSelectedUser(UserTotal? selected) => selectedUser.value = selected;
 
   final _isShowLeftPanel = true.obs;
 

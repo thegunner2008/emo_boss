@@ -1,4 +1,5 @@
 import 'package:emo_boss/common/di/injector.dart';
+import 'package:emo_boss/common/utils/logger.dart';
 
 import '../entities/entities.dart';
 import '../remote/remote.dart';
@@ -46,6 +47,7 @@ class JobStoreImpl implements JobStore {
     required Job job,
   }) {
     final request = job.toJson();
+    debugConsoleLog("request: $request");
     return ApiService.create().createJobs(
       request: request,
     );
@@ -56,9 +58,11 @@ class JobStoreImpl implements JobStore {
     required Job job,
   }) {
     final request = {
+      'url': job.url,
       'total': job.total,
       'time': job.time,
       'money': job.money,
+      'finish_at': job.finishAt?.toIso8601String(),
     };
     return ApiService.create().editJobs(
       id: job.id,

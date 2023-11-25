@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:emo_boss/common/entities/entities.dart';
 import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/styles/styles.dart';

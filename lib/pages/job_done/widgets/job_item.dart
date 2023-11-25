@@ -1,5 +1,4 @@
 import 'package:emo_boss/common/entities/entities.dart';
-import 'package:emo_boss/common/models/models.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
@@ -53,29 +52,41 @@ class JobItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        job.baseUrl,
-                        style: TextStyles.title1.copyWith(
-                          color: AppColor.black800,
+                      Expanded(
+                        child: Text(
+                          job.baseUrl,
+                          style: TextStyles.title1.copyWith(
+                            color: AppColor.black800,
+                            fontSize: 14.scaleSize,
+                          ),
                         ),
                       ),
-                      _renderStatus(status: JobState.done),
+                      Text(
+                        "${job.money.toCurrencyStr}đ",
+                        style: TextStyles.title1.copyWith(
+                          color: AppColor.primaryColor,
+                        ),
+                      ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        job.createdAt.fullDateAndTimeStr,
-                        style: TextStyles.body1.copyWith(
-                          color: AppColor.black800,
+                      Expanded(
+                        child: Text(
+                          job.createdAt.fullDateAndTimeStr,
+                          style: TextStyles.body1.copyWith(
+                            color: AppColor.black800,
+                          ),
                         ),
                       ),
-                      // _renderTotalPayment(
-                      //   job.money,
-                      //   JobState.done,
-                      // ),
+                      Text(
+                        "${job.count.toCurrencyStr}/${job.total.toCurrencyStr}",
+                        style: TextStyles.title1.copyWith(
+                          color: AppColor.secondaryColor,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -87,31 +98,12 @@ class JobItem extends StatelessWidget {
     );
   }
 
-  Widget _renderStatus({JobState status = JobState.done}) {
-    late Color color;
-    switch (status) {
-      case JobState.done:
-        color = AppColor.successColor;
-        break;
-      case JobState.cancel:
-        color = AppColor.errorColor;
-        break;
-      case JobState.pending:
-        color = AppColor.yellowColor;
-        break;
-    }
-    return Text(
-      status.getNameStatus,
-      style: TextStyles.title1.copyWith(color: color),
-    );
-  }
-
   Widget _renderIconData(int index) => Container(
         width: 40,
         height: 40,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.successColor,
+          color: AppColor.primaryColor,
           // borderRadius: Corners.lgBorder,
         ),
         alignment: Alignment.center,

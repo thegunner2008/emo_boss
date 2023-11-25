@@ -4,11 +4,11 @@ class AppColor {
   AppColor._();
 
   static const Color scaffoldBackground = Color(0xFFFFFFFF);
-  static const Color primaryColor = Color(0xFF20B149);
+  static const Color primaryColor = Color.fromARGB(255, 54, 163, 247);
   static const Color primaryText = Color(0xFF333333);
   static const Color secondaryText = Color(0xFF74788D);
   static const Color accentColor = Color(0xFF5C78FF);
-  static const Color secondaryColor = Color.fromARGB(255, 54, 163, 247);
+  static const Color secondaryColor = Color(0xFF20B149);
   static const Color warnColor = Color(0xFFFFB822);
   static const Color successColor = Color(0xFF20B149);
   static const Color errorColor = Color(0xFFFF2424);

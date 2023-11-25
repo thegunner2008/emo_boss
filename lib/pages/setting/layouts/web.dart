@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/pages/setting/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 
 class SettingWeb extends StatelessWidget {
   const SettingWeb({Key? key}) : super(key: key);
@@ -22,13 +21,8 @@ class SettingWeb extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SettingTitleWidget(title: S.current.Thanh_toan.toUpperCase(), icon: Icons.payment),
-                  const PaymentSetupWidget(),
-                  SettingTitleWidget(
-                    title: S.current.Thong_bao.toUpperCase(),
-                    icon: Icons.notifications,
-                  ),
-                  const NotificationWidget(),
+                  SettingTitleWidget(title: "Thông tin".toUpperCase(), icon: Icons.newspaper),
+                  const VersionWidget(),
                   VSpace(Insets.lg),
                 ],
               ),

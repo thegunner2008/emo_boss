@@ -37,7 +37,6 @@ class TakePhotoController extends GetxController {
       await Loading.openAndDismissLoading<String>(
         () async {
           try {
-            var dataImage;
             String data = "";
             // await ProductStore.to.upLoadPhoto(sourceBase64: imageEncoded).then(
             //       (value) => {

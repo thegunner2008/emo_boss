@@ -1,5 +1,4 @@
 import 'package:emo_boss/common/generated/l10n.dart';
-import 'package:emo_boss/common/router/router.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class SignUpButtonsAction extends StatelessWidget {
           text: S.current.Dang_ky.toUpperCase(),
           width: size.width,
           padding: EdgeInsets.all(Insets.lg),
-          background: AppColor.successColor,
+          background: AppColor.primaryColor,
           boxShadow: Shadows.universal,
           onPressed: () {
             if (!_controller.fbKey.currentState!.saveAndValidate()) {

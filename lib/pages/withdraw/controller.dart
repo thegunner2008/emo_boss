@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:get/get.dart';
@@ -37,6 +39,14 @@ class WithdrawController extends GetxController {
     }
   }
 
+  Future<Image?> getQrPayImage({required Withdraw withdraw, required double size}) async {
+    final reply = WithdrawStore.to.getReply(withdraw);
+    return await WithdrawStore.to.convertBankAccountToQrImage(
+      withdraw: withdraw.copyWith(reply: reply),
+      size: size,
+    );
+  }
+
   /// Call API
   Future _handleGetWithdraws() async {
     state.setDataState(await getWithdraws());
@@ -46,6 +56,27 @@ class WithdrawController extends GetxController {
         page: state.loadMoreCounter.pageNumber,
         pageSize: state.loadMoreCounter.itemPerPages,
       );
+
+  Future pay({required Withdraw withdraw}) async {
+    try {
+      final reply = WithdrawStore.to.getReply(withdraw);
+      await WithdrawStore.to.payWithdraw(
+        id: withdraw.id,
+        reply: reply,
+        userId: withdraw.userId,
+      );
+      await onRefresh();
+      CustomSnackBar.success(
+        title: S.current.Thanh_cong,
+        message: "Cập nhật trạng thái thành công",
+      );
+    } catch (e) {
+      CustomSnackBar.error(
+        title: S.current.Loi,
+        message: S.current.Da_co_loi_xay_ra,
+      );
+    }
+  }
 
   /// Logic Mobile
   Future onLoading() async {
@@ -62,7 +93,7 @@ class WithdrawController extends GetxController {
     }
   }
 
-  void onRefresh() async {
+  Future onRefresh() async {
     try {
       state.resetLoadMoreCounter();
       await _handleGetWithdraws();

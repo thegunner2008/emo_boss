@@ -41,14 +41,14 @@ abstract class UserStore {
 
   Future<String?> getDeviceId();
 
-  Future<ResponseList<UserPlus>> getUsers({
+  Future<ResponseList<UserTotal>> getUsers({
     int pageSize,
     int page,
     String sort,
     String order,
   });
 
-  Future<UserPlus> getUserPlus({
+  Future<UserTotal> getUserPlus({
     required int userId,
   });
 }
@@ -59,7 +59,6 @@ class UserStoreImpl implements UserStore {
     switchStatusLogin(hasToken);
     final jsonString = PrefsService.to.getString(AppStorage.storageUser);
     final json = jsonString.isNotEmpty ? jsonDecode(jsonString) : null;
-    print('json: $json');
     _user = json != null ? User.fromJson(json) : const User();
   }
 
@@ -148,7 +147,7 @@ class UserStoreImpl implements UserStore {
   }
 
   @override
-  Future<ResponseList<UserPlus>> getUsers({
+  Future<ResponseList<UserTotal>> getUsers({
     int pageSize = 20,
     int page = 1,
     String sort = "id",
@@ -162,7 +161,7 @@ class UserStoreImpl implements UserStore {
       );
 
   @override
-  Future<UserPlus> getUserPlus({
+  Future<UserTotal> getUserPlus({
     required int userId,
   }) =>
       ApiService.create().getUserPlus(userId: userId);

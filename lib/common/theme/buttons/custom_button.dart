@@ -534,6 +534,7 @@ class CustomButton {
         if (date != null) {
           resultSelect = DateTime(date.year, date.month, date.day);
         }
+
         final TimeOfDay? time = await showTimePicker(
           context: context,
           initialTime: initTime ?? TimeOfDay.now(),

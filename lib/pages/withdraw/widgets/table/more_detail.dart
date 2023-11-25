@@ -6,6 +6,8 @@ class MoreDetailWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  WithdrawController get _controller => WithdrawController.to;
+
   final Withdraw withdraw;
 
   @override
@@ -23,37 +25,29 @@ class MoreDetailWidget extends StatelessWidget {
             minHeight: 120.scaleSize,
             maxHeight: 220.scaleSize,
           ),
-          child: _details(context),
+          child: Column(
+            children: [
+              VSpace.sm,
+              Expanded(
+                flex: 2,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(child: _details(context)),
+                    if(withdraw.status != WithdrawStatus.transferred) _qrWidget(),
+                    HSpace.sm,
+                  ],
+                ),
+              ),
+              Flexible(child: _footer()),
+            ],
+          ),
           // MoreDetailRoomTransactionHistory(voucher: job),
         ),
       ),
     );
   }
-
-  Widget _linearProgress(int count, int total) => Stack(
-        alignment: Alignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8), // bo tròn cạnh của LinearProgressIndicator
-            child: LinearProgressIndicator(
-              minHeight: 24.scaleSize,
-              value: count / total,
-              backgroundColor: AppColor.grey600,
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-            ),
-          ),
-          Center(
-            child: Text(
-              "${count.toCurrencyStr}/${total.toCurrencyStr}",
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColor.white,
-              ),
-            ),
-          ),
-        ],
-      );
 
   Widget _details(BuildContext context) => Column(
         children: [
@@ -71,7 +65,7 @@ class MoreDetailWidget extends StatelessWidget {
                   dense: true,
                 ),
               ),
-              if (withdraw.bankName.isNotEmpty)
+              if (withdraw.bankKey != 0)
                 Expanded(
                   child: ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
@@ -81,7 +75,7 @@ class MoreDetailWidget extends StatelessWidget {
                       style: TextStyles.title2,
                     ),
                     title: Text(
-                      withdraw.bankName,
+                      withdraw.bankShortName,
                       style: TextStyles.title2.copyWith(color: AppColor.secondaryColor),
                     ),
                     dense: true,
@@ -124,20 +118,54 @@ class MoreDetailWidget extends StatelessWidget {
             ],
           ),
           Divider(indent: Insets.lg, endIndent: Insets.lg),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
-            minLeadingWidth: 150.scaleSize,
-            leading: Text(S.current.Ghi_chu, style: TextStyles.title2),
-            title: Text(
-              withdraw.description,
-              style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+          const Spacer(),
+        ],
+      );
+
+  Widget _qrWidget() => FutureBuilder(
+        future: _controller.getQrPayImage(withdraw: withdraw, size: 120),
+        builder: (ctx, snapshot) => RawImage(
+          image: snapshot.data as ui.Image,
+          fit: BoxFit.cover,
+        ),
+      );
+
+  Widget _footer() => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
+              minLeadingWidth: 150.scaleSize,
+              leading: Text(S.current.Ghi_chu,
+                  style: TextStyles.title2.copyWith(fontStyle: FontStyle.italic)),
+              title: Text(
+                withdraw.description,
+                style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              dense: true,
             ),
-            dense: true,
           ),
-          Align(
-            alignment: Alignment.bottomRight,
+          withdraw.status == WithdrawStatus.transferred ?
+            Expanded(
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: Insets.lg),
+                minLeadingWidth: 150.scaleSize,
+                leading: Text("ND chuyển khoản",
+                    style: TextStyles.title2.copyWith(fontStyle: FontStyle.italic)),
+                title: Text(
+                  withdraw.reply,
+                  style: TextStyles.title2.copyWith(color: AppColor.primaryColor),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                dense: true,
+              ),
+            )
+          : Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -150,15 +178,16 @@ class MoreDetailWidget extends StatelessWidget {
                 HSpace.med,
                 CustomButton.fullColor(
                   text: S.current.Hoan_thanh,
-                  background: AppColor.successColor,
+                  background: AppColor.primaryColor,
                   textColor: AppColor.white,
-                  onPressed: () {},
+                  onPressed: () => _controller.pay(withdraw: withdraw),
                 ),
-                HSpace.med,
+                if(withdraw.status == WithdrawStatus.transferred)
+
+                  HSpace.med,
               ],
             ),
           ),
-          const Spacer(),
         ],
       );
 }

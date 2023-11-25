@@ -17,7 +17,6 @@ class User {
   final DateTime? updatedAt;
   final DateTime? lastLogin;
 
-
   const User({
     this.id = -1,
     this.email = "",
@@ -38,16 +37,15 @@ class User {
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class UserPlus extends User {
-  @JsonKey(name: 'jobs')
-  final List<UserJob> userJobs;
+class UserTotal extends User {
   final Current? current;
-  final List<Withdraw> withdraws;
+  final int total;
+  final int countTransaction;
+  final int countJob;
+  final int withdrawTotal;
+  final int withdrawCount;
 
-  int get totalJobs => userJobs.length;
-  int get totalJobsByIds => userJobs.map((e) => e.jobId).toSet().length;
-
-  const UserPlus({
+  const UserTotal({
     int id = -1,
     String email = "",
     String userName = "",
@@ -56,9 +54,12 @@ class UserPlus extends User {
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? lastLogin,
-    this.userJobs = const [],
     this.current,
-    this.withdraws = const [],
+    this.total = 0,
+    this.countTransaction = 0,
+    this.countJob = 0,
+    this.withdrawTotal = 0,
+    this.withdrawCount = 0,
   }) : super(
           id: id,
           email: email,
@@ -68,12 +69,12 @@ class UserPlus extends User {
           createdAt: createdAt,
           updatedAt: updatedAt,
           lastLogin: lastLogin,
-  );
+        );
 
-  factory UserPlus.fromJson(Map<String, dynamic> json) => _$UserPlusFromJson(json);
+  factory UserTotal.fromJson(Map<String, dynamic> json) => _$UserTotalFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$UserPlusToJson(this);
+  Map<String, dynamic> toJson() => _$UserTotalToJson(this);
 
   @override
   String toString() => jsonEncode(this).toString();

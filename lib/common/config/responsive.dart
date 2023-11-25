@@ -1,9 +1,9 @@
 import 'package:emo_boss/common/utils/utils.dart';
 
 enum ScreenWidth {
-  MOBILE,
-  TABLET,
-  DESKTOP,
+  mobile,
+  tablet,
+  destop,
 }
 
 class Screen {
@@ -17,11 +17,11 @@ class Screen {
 
   static ScreenWidth getCurrentScreen(double width) {
     if(width > _desktop) {
-      if (isWeb) return ScreenWidth.DESKTOP;
-      return ScreenWidth.TABLET;
+      if (isWeb) return ScreenWidth.destop;
+      return ScreenWidth.tablet;
     } else if(width > _tablet){
-      return ScreenWidth.TABLET;
+      return ScreenWidth.tablet;
     }
-    return ScreenWidth.MOBILE;
+    return ScreenWidth.mobile;
   }
 }

@@ -8,6 +8,8 @@ class MenuModel {
   List<MenuModel> children;
   final String? _title;
   final String? _key;
+  final MenuStyleView menuStyle;
+  final bool isVisible;
 
   String get title => _title ?? screenRouter?.title ?? '';
 
@@ -24,8 +26,13 @@ class MenuModel {
     required this.icon,
     this.width = 160,
     this.children = const [],
+    this.menuStyle = MenuStyleView.all,
+    this.isVisible = true,
   })  : _title = title,
         _key = key;
 }
 
 enum MenuStyle { drawer, toolbar }
+
+enum MenuStyleView { all, right, left }
+

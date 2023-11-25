@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:emo_boss/common/entities/entities.dart';
-import 'package:emo_boss/common/router/router.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +34,6 @@ class _WebJobMobilePageState extends State<WebJobMobilePage> {
   void dispose() {
     super.dispose();
   }
-
-  void _showConfirmFinish() => CustomDialog.showSuccess(
-        context: context,
-        content: 'Bạn đã hoàn thành công việc này, trở lại màn hình chính?',
-        onApply: () => context.goNamed(ScreenRouter.job.name),
-      );
-
-  void _showConfirmError() => CustomDialog.showError(
-        context: context,
-        content: 'Có lỗi xảy ra khi gửi kết quả, trở lại màn hình chính?',
-        onApply: context.pop,
-      );
 
   Future _setCurrentUrl() async {
     _controller.setUrl();

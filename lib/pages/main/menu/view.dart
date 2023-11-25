@@ -50,7 +50,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
 
   Widget appBarForMobile() {
     return Container(
-      color: AppColor.successColor,
+      color: AppColor.primaryColor,
       child: SafeArea(
       left: false,
       right: false,
@@ -67,11 +67,11 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
   Widget renderAppBar() {
     if (isWeb) {
       switch (ConfigStore.to.screenWidth) {
-        case ScreenWidth.DESKTOP:
+        case ScreenWidth.destop:
           return appBarForWeb();
-        case ScreenWidth.MOBILE:
+        case ScreenWidth.mobile:
           return appBarForMobile();
-        case ScreenWidth.TABLET:
+        case ScreenWidth.tablet:
           return appBarForApp();
       }
     }

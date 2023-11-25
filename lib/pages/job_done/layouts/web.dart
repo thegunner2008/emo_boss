@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:emo_boss/common/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +15,6 @@ class JobDoneWeb extends StatefulWidget {
 class _JobDoneWebState extends State<JobDoneWeb> {
   final _subscriptions = <StreamSubscription>[];
   final _controller = Get.find<JobDoneController>();
-  final _debounce = Debounce(milliseconds: 1000);
 
   @override
   void initState() {

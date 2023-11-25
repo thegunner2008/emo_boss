@@ -20,7 +20,7 @@ Future showEditJobDialog({
     ),
     title: "Sửa Chiến dịch",
     content: SizedBox(
-      width: size.width > 650.scaleSize ? 650.scaleSize : size.width,
+      width: size.width > 800.scaleSize ? 800.scaleSize : size.width,
       child: Padding(
         padding: EdgeInsets.all(Insets.lg),
         child: SingleChildScrollView(

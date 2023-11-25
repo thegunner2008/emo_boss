@@ -20,7 +20,7 @@ class SignInButtonsAction extends StatelessWidget {
           text: S.current.Dang_nhap.toUpperCase(),
           width: size.width,
           padding: EdgeInsets.all(Insets.lg),
-          background: AppColor.successColor,
+          background: AppColor.primaryColor,
           boxShadow: Shadows.universal,
           onPressed: () {
             if (!_signInController.fbKey.currentState!.saveAndValidate()) {

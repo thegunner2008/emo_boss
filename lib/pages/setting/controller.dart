@@ -2,12 +2,10 @@ import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/common/values/values.dart';
-import 'package:emo_boss/pages/setting/state.dart';
 import 'package:get/get.dart';
 
 class SettingController extends GetxController {
   static SettingController get to => Get.find<SettingController>();
-  final state = SettingState();
 
   SettingController();
 

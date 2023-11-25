@@ -48,13 +48,18 @@ Job _$JobFromJson(Map<String, dynamic> json) => Job(
       valuePage: json['value_page'] as String? ?? "",
       time: json['time'] as int? ?? 0,
       baseUrl: json['base_url'] as String? ?? "",
-      money: ValueReader.intMaybeString(json, 'money') as int? ?? 0,
+      money: ValueReader.intMaybeString(json, 'money') ?? 0,
+      finishAt: json['finish_at'] == null
+          ? null
+          : DateTime.parse(json['finish_at'] as String),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
+      factor: (json['factor'] as num?)?.toDouble() ?? 1,
+      resetDay: json['reset_day'] as int? ?? 1,
     );
 
 Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
@@ -69,8 +74,11 @@ Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
       'time': instance.time,
       'base_url': instance.baseUrl,
       'money': instance.money,
+      'finish_at': instance.finishAt?.toIso8601String(),
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
+      'reset_day': instance.resetDay,
+      'factor': instance.factor,
     };
 
 CurrentJobResponse _$CurrentJobResponseFromJson(Map<String, dynamic> json) =>

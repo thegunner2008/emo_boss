@@ -255,7 +255,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<dynamic> postWithdraws(request) async {
+  Future<dynamic> postWithdraw(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -278,7 +278,30 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ResponseList<UserPlus>> getUsers({
+  Future<dynamic> payWithdraw(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/withdraws/pay',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<ResponseList<UserTotal>> getUsers({
     pageSize = 20,
     page = 1,
     sort = "id",
@@ -294,7 +317,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseList<UserPlus>>(Options(
+        _setStreamType<ResponseList<UserTotal>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -306,21 +329,21 @@ class _ApiService implements ApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseList<UserPlus>.fromJson(
+    final value = ResponseList<UserTotal>.fromJson(
       _result.data!,
-      (json) => UserPlus.fromJson(json as Map<String, dynamic>),
+      (json) => UserTotal.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<UserPlus> getUserPlus({required userId}) async {
+  Future<UserTotal> getUserPlus({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserPlus>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserTotal>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -332,7 +355,7 @@ class _ApiService implements ApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserPlus.fromJson(_result.data!);
+    final value = UserTotal.fromJson(_result.data!);
     return value;
   }
 

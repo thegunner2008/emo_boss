@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/pages/sign_in/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignInMobile extends StatelessWidget {
   const SignInMobile({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class SignInMobile extends StatelessWidget {
               ),
             ),
           ),
-          compactVerticalSpace ? Container() : SignInFooter(),
+          compactVerticalSpace ? Container() : const SignInFooter(),
         ],
       ),
     );

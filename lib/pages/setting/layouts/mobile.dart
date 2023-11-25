@@ -1,5 +1,4 @@
 import 'package:emo_boss/common/entities/entities.dart';
-import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/router/router.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
@@ -19,7 +18,7 @@ class SettingMobile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cài đặt', style: TextStyle(color: Colors.white)),
-        backgroundColor: AppColor.successColor,
+        backgroundColor: AppColor.primaryColor,
       ),
       body: ColoredBox(
         color: AppColor.grey300WithOpacity500,
@@ -44,7 +43,7 @@ class SettingMobile extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 30.scaleSize,
-                          backgroundColor: AppColor.successColor,
+                          backgroundColor: AppColor.primaryColor,
                           child: Text(
                             user.fullName.substring(0, 1).toUpperCase(),
                             style: TextStyle(fontSize: 32.scaleSize, color: Colors.white),
@@ -79,18 +78,15 @@ class SettingMobile extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.logout,
-                        color: AppColor.successColor,
+                        color: AppColor.primaryColor,
                         size: IconSizes.med,
                       ),
                     )
                   ],
                 ),
               ),
-              SettingTitleWidget(title: S.current.Thanh_toan.toUpperCase(), icon: Icons.payment),
-              const PaymentSetupWidget(),
-              SettingTitleWidget(
-                  title: S.current.Thong_bao.toUpperCase(), icon: Icons.notifications),
-              const NotificationWidget(),
+              SettingTitleWidget(title: "Thông tin".toUpperCase(), icon: Icons.newspaper),
+              const VersionWidget(),
               VSpace(Insets.med),
             ],
           ),

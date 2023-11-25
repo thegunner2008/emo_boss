@@ -1,14 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 class BuildValues {
   BuildValues._();
 
   //Prod
-  static const String $prodApiUrl =
-      'https://emo-server-380518.el.r.appspot.com/';
+  static const String $prodApiUrl = 'http://103.154.244.98:8000/';
 
   //dev
-  static const String $devApiUrl =
-      // 'https://0.0.0.0:8000/';
-      // 'http://192.168.1.109:8000/';
-      'http://192.168.1.100:8000/';
-      // 'http://10.10.20.210:8000/';
+  static const String $devApiUrl = kIsWeb ? 'http://localhost:8000/' : 'http://192.168.1.101:8000/';
 }

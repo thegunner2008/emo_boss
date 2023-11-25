@@ -7,6 +7,6 @@ class UserColumnConstants {
   static const createdDate = "createdDate";
   static const lastLogin = "lastLogin";
   static const isActive = "isActive";
-  static const totalJobs = "totalJobs";
-  static const totalJobsById = "totalJobsById";
+  static const countTransactions = "countTransactions";
+  static const countJob = "countJob";
 }

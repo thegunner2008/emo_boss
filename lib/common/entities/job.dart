@@ -49,8 +49,11 @@ class Job {
   final String baseUrl;
   @JsonKey(readValue: ValueReader.intMaybeString)
   final int money;
+  DateTime? finishAt;
   DateTime? createdAt;
   DateTime? updatedAt;
+  int resetDay;
+  double factor;
 
   // final List<UserJob> users;
   // final Current current;
@@ -67,8 +70,11 @@ class Job {
     this.time = 0,
     this.baseUrl = "",
     this.money = 0,
+    this.finishAt,
     this.createdAt,
     this.updatedAt,
+    this.factor = 1,
+    this.resetDay = 1,
     // this.users = const [],
     // this.current = const Current(),
   });
@@ -89,8 +95,11 @@ class Job {
     int? time,
     String? baseUrl,
     int? money,
+    DateTime? finishAt,
     DateTime? createdAt,
     DateTime? updatedAt,
+    int? resetDay,
+    double? factor,
   }) =>
       Job(
         id: id ?? this.id,
@@ -104,8 +113,11 @@ class Job {
         time: time ?? this.time,
         baseUrl: baseUrl ?? this.baseUrl,
         money: money ?? this.money,
+        finishAt: finishAt ?? this.finishAt,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
+        resetDay: resetDay ?? this.resetDay,
+        factor: factor ?? this.factor,
       );
 
   static Job cloneInstance(Job job) {

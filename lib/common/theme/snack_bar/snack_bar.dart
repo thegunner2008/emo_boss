@@ -25,7 +25,7 @@ class CustomSnackBar {
         content: ListTile(
           textColor: Colors.white,
           leading: Icon(
-            CustomIcons.ok_circled,
+            CustomIcons.okCircled,
             size: Insets.xl,
             color: AppColor.white,
           ),
@@ -68,7 +68,7 @@ class CustomSnackBar {
         content: ListTile(
           textColor: Colors.white,
           leading: Icon(
-            CustomIcons.attention_circled,
+            CustomIcons.attentionCircled,
             size: Insets.xl,
             color: AppColor.white,
           ),
@@ -154,7 +154,7 @@ class CustomSnackBar {
         content: ListTile(
           textColor: Colors.white,
           leading: Icon(
-            CustomIcons.info_circled,
+            CustomIcons.infoCircled,
             size: Insets.xl,
             color: AppColor.white,
           ),

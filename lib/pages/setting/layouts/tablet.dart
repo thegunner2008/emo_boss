@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
+import 'package:flutter/material.dart';
 
 import '../index.dart';
 
@@ -28,15 +27,10 @@ class _SettingTabletState extends State<SettingTablet> {
   var _index = 0;
 
   final listSetting = [
-    SettingWithSectionData(
-      title: S.current.Thiet_lap_thanh_toan,
-      icon: Icons.payment,
-      widget: const PaymentSetupDetailWidget(),
-    ),
-    SettingWithSectionData(
-      title: S.current.Thong_bao,
-      icon: Icons.notifications,
-      widget: const NotificationWidget(),
+    const SettingWithSectionData(
+      title: "Thông tin",
+      icon: Icons.newspaper,
+      widget: VersionWidget(),
     ),
   ];
 

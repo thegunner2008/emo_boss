@@ -4,9 +4,7 @@ import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/values/values.dart';
 import 'package:emo_boss/pages/setting/index.dart';
-import 'package:emo_boss/pages/setting/widgets/widgets.dart';
 
-import 'setting_fragment/setting_fragment.dart';
 
 class NotificationWidget extends StatelessWidget {
   const NotificationWidget({Key? key}) : super(key: key);

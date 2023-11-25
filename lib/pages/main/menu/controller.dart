@@ -32,8 +32,24 @@ class MenuXController extends GetxController {
       MenuModel(
         screenRouter: ScreenRouter.setting,
         icon: Icons.settings_outlined,
+        menuStyle: MenuStyleView.right,
       ),
     ];
+  }
+
+  void handleClickMenu(MenuModel model, BuildContext context) {
+    keyDrawer.currentState?.closeDrawer();
+    if (model.screenRouter != null && MainController.to.state.currentPage != model.screenRouter) {
+      handleRedirect(model.screenRouter, context);
+    } else if (model.screenRouter == null) {
+      handleNullRouter(model, context);
+    }
+  }
+
+  void handleNullRouter(MenuModel model, BuildContext context) {
+    // if (model.key == AppKey.$menuRemoveKey) {
+    //   handleRemoveData(context);
+    // }
   }
 
   void handleRedirect(ScreenRouter? screenRouter, BuildContext context) {

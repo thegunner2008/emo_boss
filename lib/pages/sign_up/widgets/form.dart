@@ -126,7 +126,7 @@ class _SignUpFormState extends State<SignUpForm> {
             prefixIcon: renderIcon(Icons.lock_reset_rounded, size: IconSizes.lg),
             suffixIcon: IconButton(
               onPressed: () => setState(() => isShowPassword = !isShowPassword),
-              icon: renderIcon(isShowPassword ? CustomIcons.eye_slash : CustomIcons.eye, size: IconSizes.sm),
+              icon: renderIcon(isShowPassword ? CustomIcons.eyeSlash : CustomIcons.eye, size: IconSizes.sm),
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               focusColor: Colors.transparent,

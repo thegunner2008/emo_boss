@@ -34,7 +34,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'last_login': instance.lastLogin?.toIso8601String(),
     };
 
-UserPlus _$UserPlusFromJson(Map<String, dynamic> json) => UserPlus(
+UserTotal _$UserTotalFromJson(Map<String, dynamic> json) => UserTotal(
       id: json['id'] as int? ?? -1,
       email: json['email'] as String? ?? "",
       userName: json['user_name'] as String? ?? "",
@@ -49,20 +49,17 @@ UserPlus _$UserPlusFromJson(Map<String, dynamic> json) => UserPlus(
       lastLogin: json['last_login'] == null
           ? null
           : DateTime.parse(json['last_login'] as String),
-      userJobs: (json['jobs'] as List<dynamic>?)
-              ?.map((e) => UserJob.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
       current: json['current'] == null
           ? null
           : Current.fromJson(json['current'] as Map<String, dynamic>),
-      withdraws: (json['withdraws'] as List<dynamic>?)
-              ?.map((e) => Withdraw.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      total: json['total'] as int? ?? 0,
+      countTransaction: json['count_transaction'] as int? ?? 0,
+      countJob: json['count_job'] as int? ?? 0,
+      withdrawTotal: json['withdraw_total'] as int? ?? 0,
+      withdrawCount: json['withdraw_count'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$UserPlusToJson(UserPlus instance) => <String, dynamic>{
+Map<String, dynamic> _$UserTotalToJson(UserTotal instance) => <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
       'user_name': instance.userName,
@@ -71,9 +68,12 @@ Map<String, dynamic> _$UserPlusToJson(UserPlus instance) => <String, dynamic>{
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'last_login': instance.lastLogin?.toIso8601String(),
-      'jobs': instance.userJobs,
       'current': instance.current,
-      'withdraws': instance.withdraws,
+      'total': instance.total,
+      'count_transaction': instance.countTransaction,
+      'count_job': instance.countJob,
+      'withdraw_total': instance.withdrawTotal,
+      'withdraw_count': instance.withdrawCount,
     };
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>

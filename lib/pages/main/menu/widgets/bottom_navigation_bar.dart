@@ -54,7 +54,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: AppColor.successColor,
+      selectedItemColor: AppColor.primaryColor,
       items: tabs,
       currentIndex: _currentIndex,
       onTap: (index) => _onItemTapped(context, index),

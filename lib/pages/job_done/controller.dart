@@ -2,6 +2,7 @@ import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../common/entities/entities.dart';
 import '../../common/store/store.dart';
@@ -82,7 +83,10 @@ class JobDoneController extends GetxController {
             CustomDialog.showSuccess(
               context: context,
               content: 'Sửa thành công?',
-              onApply: () => _handleInitData(),
+              onApply: () {
+                _handleInitData();
+                context.pop();
+              }
             );
           }
         },

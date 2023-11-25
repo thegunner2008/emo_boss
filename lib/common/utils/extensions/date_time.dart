@@ -56,4 +56,11 @@ extension DateTimeOrNullExtention on DateTime? {
 
     return "DD/MM/YYYY HH:mm";
   }
+
+  int get timeIntDay {
+    if (this != null) {
+      return int.parse(DateFormat('yyMMdd').format(this!));
+    }
+    return DateTime.now().year * 100;
+  }
 }

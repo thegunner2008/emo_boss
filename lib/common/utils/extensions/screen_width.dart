@@ -3,9 +3,9 @@ import 'package:emo_boss/common/utils/extensions/platform.dart';
 
 
 extension ScreenWidthExtension on ScreenWidth {
-  bool get isTablet => ScreenWidth.TABLET == this;
+  bool get isTablet => ScreenWidth.tablet == this;
 
-  bool get isMobile => ScreenWidth.MOBILE == this;
+  bool get isMobile => ScreenWidth.mobile == this;
 
-  bool get isDesktop => ScreenWidth.DESKTOP == this && isWeb;
+  bool get isDesktop => ScreenWidth.destop == this && isWeb;
 }

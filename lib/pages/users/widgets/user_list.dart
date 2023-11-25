@@ -19,7 +19,7 @@ class UserList extends StatefulWidget {
 class _UserListState extends State<UserList> {
   final UserController _controller = UserController.to;
 
-  List<UserPlus> get users => _controller.state.users;
+  List<UserTotal> get users => _controller.state.users;
 
   @override
   void initState() {

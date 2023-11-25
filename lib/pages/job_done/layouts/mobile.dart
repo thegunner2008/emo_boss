@@ -2,7 +2,6 @@ import 'package:emo_boss/common/entities/entities.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/utils/extensions/extensions.dart';
-import 'package:emo_boss/pages/job_done/index.dart';
 import 'package:emo_boss/pages/pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class JobDoneMobile extends StatelessWidget {
               background: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [AppColor.successColor, AppColor.successColor.withOpacity(0)],
+                    colors: [AppColor.primaryColor, AppColor.primaryColor.withOpacity(0)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -55,9 +54,9 @@ class JobDoneMobile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      "Xin chào, ${user.fullName}!",
-                      style: const TextStyle(
+                    const Text(
+                      "Chiến dịch",
+                      style: TextStyle(
                         fontSize: 22.0,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -74,7 +73,7 @@ class JobDoneMobile extends StatelessWidget {
               ),
               collapseMode: CollapseMode.parallax,
             ),
-            backgroundColor: AppColor.successColor,
+            backgroundColor: AppColor.primaryColor,
             shape: const ContinuousRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30.0),

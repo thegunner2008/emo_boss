@@ -58,7 +58,7 @@ class WebDataRowItemWidget<T> extends StatelessWidget {
       );
 
   Widget iconShowMore() => Icon(
-        isShowMore ? CustomIcons.caret_down : CustomIcons.caret_right,
+        isShowMore ? CustomIcons.caretDown : CustomIcons.caretRight,
         size: IconSizes.sm,
         color: AppColor.black800,
       );

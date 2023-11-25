@@ -11,7 +11,7 @@ class UserController extends GetxController {
 
   final state = UserState();
 
-  final tableController = WebDataTableController<UserPlus>();
+  final tableController = WebDataTableController<UserTotal>();
 
   Future _handleInitData() async {
     try {
@@ -42,12 +42,12 @@ class UserController extends GetxController {
     state.setDataState(await getUsers());
   }
 
-  Future<ResponseList<UserPlus>> getUsers() => UserStore.to.getUsers(
+  Future<ResponseList<UserTotal>> getUsers() => UserStore.to.getUsers(
         page: state.loadMoreCounter.pageNumber,
         pageSize: state.loadMoreCounter.itemPerPages,
       );
 
-  Future<UserPlus> getUser(int userId) => UserStore.to.getUserPlus(userId: userId);
+  Future<UserTotal> getUser(int userId) => UserStore.to.getUserPlus(userId: userId);
 
   /// Logic Mobile
   Future onLoading() async {
@@ -75,7 +75,7 @@ class UserController extends GetxController {
   }
 
   //web
-  Future<List<UserPlus>> handleChangeData({required int page, required int pageSize}) async {
+  Future<List<UserTotal>> handleChangeData({required int page, required int pageSize}) async {
     try {
       final res = await UserStore.to.getUsers(
         page: page,

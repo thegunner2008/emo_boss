@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'common/config/config.dart';
 import 'common/di/injector.dart';
 import 'common/theme/theme.dart';
 
 class Global {
+  static FirebaseApp? firebaseApp;
+
   static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
 
   static Future init({BuildMode buildMode = BuildMode.prod}) async {

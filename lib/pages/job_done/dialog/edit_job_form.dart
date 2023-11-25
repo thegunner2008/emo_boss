@@ -2,6 +2,7 @@ import 'package:emo_boss/common/entities/entities.dart';
 import 'package:emo_boss/common/generated/l10n.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
+import 'package:emo_boss/common/utils/utils.dart';
 import 'package:emo_boss/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -22,22 +23,28 @@ class _FormJobState extends State<EditJobForm> {
 
   JobDoneController get _controller => JobDoneController.to;
 
+  final _urlFocusNode = FocusNode();
   final _totalFocusNode = FocusNode();
   final _timeFocusNode = FocusNode();
   final _moneyFocusNode = FocusNode();
 
+  final _urlController = TextEditingController();
   final _totalController = TextEditingController();
   final _timeController = TextEditingController();
   final _moneyController = TextEditingController();
+  DateTime? _finishAt;
 
   final fbKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
     super.initState();
+
+    _urlController.text = _currentJob.url;
     _totalController.text = _currentJob.total.toString();
     _timeController.text = _currentJob.time.toString();
     _moneyController.text = _currentJob.money.toString();
+    _finishAt = _currentJob.finishAt;
   }
 
   /// constants only in widgets
@@ -95,6 +102,7 @@ class _FormJobState extends State<EditJobForm> {
       key: fbKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           CustomInput.outline(
             padding: padding,
@@ -124,37 +132,39 @@ class _FormJobState extends State<EditJobForm> {
           ),
           VSpace.lg,
           CustomInput.outline(
+            name: "url",
+            controller: _urlController,
+            padding: paddingTextEditor,
+            prefixIcon: renderIcon(Icons.edit_calendar_outlined),
+            textAlign: TextAlign.start,
+            labelText: "Url",
+            labelStyle: textStyle.copyWith(color: AppColor.primaryColor),
+            floatingLabelStyle: floatingLabelStyle,
+            textStyle: textStyle.copyWith(fontSize: 12.scaleSize),
+            maxLines: 3,
+            colorBorderFocus: mainInputColor,
+            type: TextInputType.text,
+            action: TextInputAction.next,
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(errorText: S.current.Vui_long_khong_de_trong),
+            ]),
+            focusNode: _urlFocusNode,
+            onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_timeFocusNode),
+          ),
+          VSpace.lg,
+          CustomInput.outline(
+            name: "keyValue",
             maxLines: 2,
             padding: padding,
             prefixIcon: iconView,
             textAlign: TextAlign.start,
-            labelText: "Url",
+            labelText: "key-value",
             labelStyle: textStyle.copyWith(color: AppColor.primaryColor),
             floatingLabelStyle: floatingStyle,
             textStyle: textStyle,
             colorBorderFocus: AppColor.secondaryColor,
             enabled: false,
-            hintText: _currentJob.url,
-          ),
-          VSpace.lg,
-          SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: Expanded(
-              child: CustomInput.outline(
-                maxLines: 2,
-                padding: padding,
-                prefixIcon: iconView,
-                textAlign: TextAlign.start,
-                labelText: "key-value",
-                labelStyle: textStyle.copyWith(color: AppColor.primaryColor),
-                floatingLabelStyle: floatingStyle,
-                textStyle: textStyle,
-                colorBorderFocus: AppColor.secondaryColor,
-                enabled: false,
-                hintText: "${_currentJob.keyPage} - ${_currentJob.valuePage}",
-              ),
-            ),
+            hintText: "${_currentJob.keyPage} - ${_currentJob.valuePage}",
           ),
           VSpace.lg,
           CustomInput.outline(
@@ -196,7 +206,6 @@ class _FormJobState extends State<EditJobForm> {
               FormBuilderValidators.min(1, errorText: "Vui lòng nhập số lớn hơn 0"),
             ]),
             focusNode: _timeFocusNode,
-            isEmail: true,
             onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_timeFocusNode),
           ),
           VSpace.lg,
@@ -221,36 +230,69 @@ class _FormJobState extends State<EditJobForm> {
             onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_moneyFocusNode),
           ),
           VSpace.lg,
-          CustomButton.fullColor(
-            width: double.infinity,
-            text: "Sửa chiến dịch",
-            padding: EdgeInsets.all(Insets.lg),
-            background: AppColor.successColor,
-            boxShadow: Shadows.universal,
-            onPressed: () {
-              if (!fbKey.currentState!.saveAndValidate()) {
-                return;
-              }
-              final job = _currentJob.copyWith(
-                total: int.parse(_totalController.text),
-                time: int.parse(_timeController.text),
-                money: int.parse(_moneyController.text),
-              );
-              _controller.editJob(context: context, job: job);
+          CustomInput.selectDateTimeOutline(
+            name: "finishJob",
+            backgroundColor: AppColor.white,
+            padding: EdgeInsets.symmetric(
+              vertical: Insets.med,
+              horizontal: Insets.med,
+            ),
+            initialDate: _currentJob.finishAt,
+            labelText: "Ngày kết thúc",
+            labelStyle: textStyle.copyWith(color: AppColor.primaryColor),
+            prefixIcon: renderIcon(Icons.access_time_outlined),
+            onChanged: (value) {
+              if (value == null) return;
+              _finishAt = value;
             },
           ),
           VSpace.lg,
-          if (!widget.hideDeleteButton)
-            CustomButton.fullColor(
-              width: double.infinity,
-              text: "Xoá chiến dịch",
-              padding: EdgeInsets.all(Insets.lg),
-              background: AppColor.errorColor,
-              boxShadow: Shadows.universal,
-              onPressed: () {
-                _controller.deleteJob(context: context, job: _currentJob);
-              },
+          SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: CustomButton.fullColor(
+                    width: double.infinity,
+                    text: "APPLY",
+                    padding: EdgeInsets.all(Insets.lg),
+                    background: AppColor.primaryColor,
+                    boxShadow: Shadows.universal,
+                    onPressed: () {
+                      if (!fbKey.currentState!.saveAndValidate()) {
+                        return;
+                      }
+                      final job = _currentJob.copyWith(
+                        url: _urlController.text,
+                        total: int.parse(_totalController.text),
+                        time: int.parse(_timeController.text),
+                        money: int.parse(_moneyController.text),
+                        finishAt: _finishAt,
+                      );
+                      _controller.editJob(context: context, job: job);
+                    },
+                  ),
+                ),
+                HSpace.med,
+                if (!widget.hideDeleteButton)
+                  Expanded(
+                    child: CustomButton.fullColor(
+                      width: double.infinity,
+                      text: "DELETE",
+                      padding: EdgeInsets.all(Insets.lg),
+                      background: AppColor.errorColor,
+                      boxShadow: Shadows.universal,
+                      onPressed: () {
+                        _controller.deleteJob(context: context, job: _currentJob);
+                      },
+                    ),
+                  ),
+              ],
             ),
+          ),
+          VSpace.lg,
         ],
       ),
     );

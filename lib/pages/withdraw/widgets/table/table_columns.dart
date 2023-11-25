@@ -6,7 +6,9 @@ final _tableColumns = [
     key: JobColumnConstants.name,
     name: "User",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
-      return _textWrapper(rowData.user.userName);
+      return _textWrapper(
+        Text(rowData.user.userName, style: TextStyles.body1.copyWith(color: AppColor.black800)),
+      );
     },
   ),
   WebDataTableColumn<Withdraw>(
@@ -15,7 +17,10 @@ final _tableColumns = [
     name: "Số tiền",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       final value = "${rowData.money.toCurrencyStr}đ";
-      return _textWrapper(value, alignment: Alignment.center);
+      return _textWrapper(
+        Text(value, style: TextStyles.body1.copyWith(color: AppColor.black800)),
+        alignment: Alignment.center,
+      );
     },
   ),
   WebDataTableColumn<Withdraw>(
@@ -23,8 +28,12 @@ final _tableColumns = [
     key: JobColumnConstants.value,
     name: "Tài khoản",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
-      final value = "${rowData.accountName} - ${rowData.bankName} - ${rowData.numberAccount}";
-      return _textWrapper(value, alignment: Alignment.center);
+      final value =
+          "${rowData.accountName} - ${rowData.bankShortName} - ${rowData.numberAccount}";
+      return _textWrapper(
+        Text(value, style: TextStyles.body1.copyWith(color: AppColor.black800)),
+        alignment: Alignment.center,
+      );
     },
   ),
   WebDataTableColumn<Withdraw>(
@@ -33,39 +42,39 @@ final _tableColumns = [
     name: S.current.Ngay_tao,
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
-        rowData.createdAt?.fullDateAndTimeStr ?? "",
+        Text(
+          rowData.createdAt?.fullDateAndTimeStr ?? "",
+          style: TextStyles.body1.copyWith(color: AppColor.black800),
+        ),
       );
     },
   ),
-  // WebDataTableColumn<Withdraw>(
-  //   flex: 3,
-  //   key: JobColumnConstants.expiredDate,
-  //   name: S.current.Ngay_sua,
-  //   customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
-  //     return _textWrapper(
-  //       rowData.updatedAt?.fullDateAndTimeStr ?? "",
-  //       alignment: Alignment.center,
-  //     );
-  //   },
-  // ),
   WebDataTableColumn<Withdraw>(
     flex: 3,
     key: JobColumnConstants.status,
     name: "Trạng thái",
     customizeItemWidget: (value, rowData, columnKey, columnName, width, showOnScreens) {
       return _textWrapper(
-        rowData.status?.name ?? "",
+        Text(
+          rowData.status?.getTitle() ?? "",
+          style: TextStyles.body1.copyWith(
+            fontStyle: FontStyle.italic,
+            color: rowData.status == WithdrawStatus.transferred
+                ? AppColor.successColor
+                : AppColor.orange,
+          ),
+        ),
         alignment: Alignment.center,
       );
     },
   ),
 ];
 
-Widget _textWrapper(String text, {Alignment alignment = Alignment.centerLeft}) => Container(
+Widget _textWrapper(Widget widget, {Alignment alignment = Alignment.centerLeft}) => Container(
       decoration: const BoxDecoration(
         border: Border(left: BorderSide(color: AppColor.grey300, width: 1)),
       ),
       alignment: alignment,
       padding: EdgeInsets.all(Insets.sm),
-      child: Text(text, style: TextStyles.body1.copyWith(color: AppColor.black800)),
+      child: widget,
     );

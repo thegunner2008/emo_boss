@@ -4,6 +4,7 @@ import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
 import 'package:emo_boss/common/utils/utils.dart';
+import 'package:emo_boss/common/values/values.dart';
 import 'package:flutter/material.dart';
 
 class WithdrawItem extends StatelessWidget {
@@ -55,7 +56,7 @@ class WithdrawItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         withdraw.withdrawMethod == 'Ngân hàng'
-                            ? withdraw.bankName
+                            ? (AppConstant.mapBankBIN[withdraw.bankKey] ?? '')
                             : withdraw.withdrawMethod,
                         style: TextStyles.title1.copyWith(
                           color: AppColor.black800,
@@ -126,7 +127,7 @@ class WithdrawItem extends StatelessWidget {
         height: 40,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.successColor,
+          color: AppColor.primaryColor,
           // borderRadius: Corners.lgBorder,
         ),
         alignment: Alignment.center,

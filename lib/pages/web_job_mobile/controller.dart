@@ -18,11 +18,17 @@ class WebJobMobileController extends GetxController {
 
   InAppWebViewController? _webViewController;
 
+  final urlController = TextEditingController();
+
   final totalController = TextEditingController();
 
   final timeController = TextEditingController();
 
+  final resetDaysController = TextEditingController(text: "1");
+
   final moneyController = TextEditingController();
+
+  final factorController = TextEditingController(text: "1");
 
   void initState(Job job) {
     state.setJob(job);
@@ -33,41 +39,27 @@ class WebJobMobileController extends GetxController {
 
   void setUrl() {
     final uri = Uri.parse(state.currentUrl);
-    state.setJob(state.job.copyWith(url: state.currentUrl, baseUrl: '${uri.scheme}://${uri.host}'));
+    state.setJob(state.job.copyWith(url: state.currentUrl, baseUrl: uri.host));
+    urlController.text = state.currentUrl;
   }
 
   void handleValuePage() {
     _webViewController?.removeJavaScriptHandler(handlerName: Event.finishJob.name);
-    _webViewController?.addJavaScriptHandler(
-      handlerName: Event.finishJob.name,
-      callback: (args) {
-        state.setIndexValuePage(args[0] as int, args[1] as String);
-      },
-    );
-
-    final js = """
-              try {
-                const styleSheets = document.styleSheets;
-                if (styleSheets) {
-                  const randomIndex = Math.floor(Math.random() * styleSheets.length);
-                  const styleSheet = styleSheets[randomIndex];
-                  const cssRules = styleSheet.cssRules;
-                  window.flutter_inappwebview.callHandler('${Event.finishJob.name}', randomIndex, cssRules[0].selectorText);
-                }
-              } catch (error) {
-              }
-          """;
-
-    _webViewController?.evaluateJavascript(source: js);
+    _webViewController?.getTitle().then((value) {
+      state.setIndexValuePage(99, value ?? "");
+    });
   }
 
   void handleFinishJob(BuildContext context) {
     final job = state.job.copyWith(
+      url: state.currentUrl,
       total: totalController.text.parseSafeInt,
       time: timeController.text.parseSafeInt,
       money: moneyController.text.parseSafeInt,
       keyPage: state.indexPage.toString(),
       valuePage: state.valuePage,
+      factor: factorController.text.parseSafeDouble,
+      resetDay: resetDaysController.text.parseSafeInt,
     );
 
     Loading.openAndDismissLoading(() async {

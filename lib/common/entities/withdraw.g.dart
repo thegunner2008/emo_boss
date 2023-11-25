@@ -7,13 +7,14 @@ part of 'withdraw.dart';
 // **************************************************************************
 
 Withdraw _$WithdrawFromJson(Map<String, dynamic> json) => Withdraw(
+      id: json['id'] as int? ?? 0,
       description: json['description'] as String? ?? "",
       reply: json['reply'] as String? ?? "",
       urlClue: json['url_clue'] as String? ?? "",
       imageClue: json['image_clue'] as String? ?? "",
       money: json['money'] as int? ?? 0,
       withdrawMethod: json['withdraw_method'] as String? ?? "",
-      bankName: json['bank_name'] as String? ?? "",
+      bankKey: json['bank_key'] as int? ?? 0,
       numberAccount: json['number_account'] as String? ?? "",
       accountName: json['account_name'] as String? ?? "",
       status: $enumDecodeNullable(_$WithdrawStatusEnumMap, json['status']) ??
@@ -31,13 +32,14 @@ Withdraw _$WithdrawFromJson(Map<String, dynamic> json) => Withdraw(
     );
 
 Map<String, dynamic> _$WithdrawToJson(Withdraw instance) => <String, dynamic>{
+      'id': instance.id,
       'description': instance.description,
       'reply': instance.reply,
       'url_clue': instance.urlClue,
       'image_clue': instance.imageClue,
       'money': instance.money,
       'withdraw_method': instance.withdrawMethod,
-      'bank_name': instance.bankName,
+      'bank_key': instance.bankKey,
       'number_account': instance.numberAccount,
       'account_name': instance.accountName,
       'status': _$WithdrawStatusEnumMap[instance.status],

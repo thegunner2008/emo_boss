@@ -1,5 +1,4 @@
 import 'package:emo_boss/common/entities/entities.dart';
-import 'package:emo_boss/common/models/models.dart';
 import 'package:emo_boss/common/store/store.dart';
 import 'package:emo_boss/common/styles/styles.dart';
 import 'package:emo_boss/common/theme/theme.dart';
@@ -16,7 +15,7 @@ class UserItem extends StatelessWidget {
   }) : super(key: key);
 
   final bool isSelected;
-  final UserPlus user;
+  final UserTotal user;
   final int index;
   final ValueChanged<User> onTap;
 
@@ -63,6 +62,7 @@ class UserItem extends StatelessWidget {
                         user.email,
                         style: TextStyles.title1.copyWith(
                           color: AppColor.grey600,
+                          fontSize: FontSizes.s14,
                         ),
                       ),
                     ],
@@ -78,9 +78,10 @@ class UserItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Số lần/Số Job: ${user.totalJobs}/${user.totalJobsByIds}",
+                        "Số lần/Số Job: ${user.countTransaction}/${user.countJob}",
                         style: TextStyles.title1.copyWith(
-                          color: AppColor.grey600,
+                          color: AppColor.primaryColor,
+                          fontSize: FontSizes.s14,
                         ),
                       ),
                     ],
@@ -99,7 +100,7 @@ class UserItem extends StatelessWidget {
         height: 40,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.successColor,
+          color: AppColor.primaryColor,
           // borderRadius: Corners.lgBorder,
         ),
         alignment: Alignment.center,
